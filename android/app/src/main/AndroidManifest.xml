@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_web3_basic">
+     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="flutter_web3_basic"
+        android:label="Flutter Web3 Basic"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

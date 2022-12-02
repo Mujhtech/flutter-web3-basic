@@ -36,6 +36,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  web3dart: ^2.5.1
+  provider: ^6.0.4
+  http: ^0.13.5
+  walletconnect_dart: ^0.0.11
+  url_launcher: ^6.1.7
+  w: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +53,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
+  web3dart_builders: ^0.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
