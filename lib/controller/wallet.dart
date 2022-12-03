@@ -1,16 +1,14 @@
-// ignore_for_file: avoid_print
-
-import 'dart:math';
+// ignore_for_file: avoid_print, depend_on_referenced_packages
 
 import 'package:eip55/eip55.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web3_basic/main.dart';
-import 'package:flutter_web3_basic/models/forum.dart';
 import 'package:http/http.dart';
 import 'package:web3dart/web3dart.dart';
 
 import 'package:flutter_web3_basic/blockcain/forumV1.g.dart';
 import 'package:flutter_web3_basic/constant.dart';
+import 'package:flutter_web3_basic/main.dart';
+import 'package:flutter_web3_basic/models/forum.dart';
 import 'package:flutter_web3_basic/models/models.dart';
 import 'package:flutter_web3_basic/utils/utils.dart';
 
@@ -112,34 +110,17 @@ class WalletController extends ChangeNotifier {
         address: EthereumAddress.fromHex(GlobalConstants.contractAddress),
         client: web3client,
       );
-      final res = await forumV1.addComment('Devfest Minna 2022', message,
-          credentials: walletConnectHelper.getEthereumCredentials());
-      print(res);
+      Credentials cred = walletConnectHelper.getEthereumCredentials();
+      await forumV1.addComment('Devfest Minna 2022', message,
+          credentials: cred,
+          transaction: Transaction(
+              from: walletConnectHelper
+                  .getEthereumCredentials()
+                  .getEthereumAddress()));
       await fetchComment();
     } catch (e) {
       //
       print(e);
     }
-  }
-
-  // Send token
-  Future<String> sendToken(String toAddress, String amount) async {
-    final txBytes = await sendTransaction(toAddress, amount);
-    return txBytes;
-  }
-
-  Future<String> sendTransaction(String toAddress, String amount) async {
-    final transaction = Transaction(
-      to: EthereumAddress.fromHex(toAddress),
-      from: EthereumAddress.fromHex(publicWalletAddress!),
-      value: EtherAmount.fromUnitAndValue(
-        EtherUnit.wei,
-        BigInt.from(double.parse(amount) * pow(10, 18)),
-      ),
-    );
-    Credentials cred = walletConnectHelper.getEthereumCredentials();
-
-    final txBytes = await web3client.sendTransaction(cred, transaction);
-    return txBytes;
   }
 }

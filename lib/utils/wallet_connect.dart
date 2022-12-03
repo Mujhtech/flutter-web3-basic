@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_web3_basic/constant.dart';
 import 'package:flutter_web3_basic/models/models.dart';
 import 'package:flutter_web3_basic/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,9 +9,6 @@ import 'package:walletconnect_dart/walletconnect_dart.dart';
 /// WalletConnectHelper is an object for implement WalletConnect protocol for
 /// mobile apps using deep linking to connect with wallets.
 class WalletConnectHelper {
-  static const String ethRinkebyTestnetEndpoints =
-      'https://rinkeby.infura.io/v3/e3090e47c3624aa3aa126fa7297bff9b';
-
   final String? bridge;
 
   /// mobile app info
@@ -93,10 +91,13 @@ class WalletConnectHelper {
   }
 
   WalletConnectEthereumCredentials getEthereumCredentials() {
-    EthereumWalletConnectProvider provider =
-        EthereumWalletConnectProvider(connector);
+    EthereumWalletConnectProvider provider = EthereumWalletConnectProvider(
+        connector,
+        chainId: GlobalConstants.testnetChainId);
+
     WalletConnectEthereumCredentials credentials =
         WalletConnectEthereumCredentials(provider: provider);
+
     return credentials;
   }
 
